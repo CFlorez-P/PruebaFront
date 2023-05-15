@@ -2,6 +2,9 @@
 
 Esta es la parte del front para la prueba técnica de f2x
 
+Angular V 16.0.1
+Npm V 9.6.6
+
 Se me fue la mano con las carpetas entonces para poder hacer el npm install, el ng serve etc asegurarse de estar en la carpeta 'prueba-front'
 Posiblemente al instalar con npm i sea necesario utilizar el --force dado que el ng-select estaba generando problemas
 Todo corre localmente
