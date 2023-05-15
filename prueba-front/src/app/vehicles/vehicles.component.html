@@ -1,0 +1,135 @@
+<div class="bp-itemcontsect2" [formGroup]="formGroup" novalidate>
+  <div formGroupName="formSearchService">
+    <div class="row row-form">
+
+      <div class="col">
+        <label>Estación</label>
+        <div class="row">
+          <ng-select [selectOnTab]="true" [items]="stations" class="custom-select"
+            formControlName="{{FORM_CONTROL_STATION}}"></ng-select>
+        </div>
+      </div>
+
+      <div class="col">
+        <label>Fecha Desde</label>
+        <div class="row calendar-container">
+          <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d1="ngbDatepicker"
+            formControlName="{{FORM_CONTROL_FROM_DATE}}" readonly>
+          <button (click)="d1.toggle()" type="button" class="btn-calendar">
+            <i class="mdi mdi-calendar"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="col">
+        <label> Fecha Hasta </label>
+        <div class="row calendar-container">
+          <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d2="ngbDatepicker"
+            formControlName="{{FORM_CONTROL_TO_DATE}}" readonly>
+          <button (click)="d2.toggle()" type="button" class="btn-calendar">
+            <i class="mdi mdi-calendar"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-button">
+      <div class="col">
+        <button class="button" (click)="showData()">Ver Todos Los Datos</button>
+      </div>
+      <div class="col">
+        <button class="button" (click)="showValueData()">Ver Valores</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Valores Agrupados -->
+<div class="row bp-itemcontsect2" *ngIf="showVehicleValueData">
+  <div class="table-row">
+    <div class="col">
+      <span class="bold large-font">FECHA</span>
+    </div>
+    <ng-container *ngFor="let estacion of stations">
+      <div class="col">
+        <span class="bold large-font">{{ estacion }}</span>
+        <span class="bold">Total Cantidad - Total Valor Tabulado</span>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="table-row" *ngFor="let date of dates">
+
+      <div class="col">
+        <span class="bold large-font">{{ date }}</span>
+      </div>
+
+      <ng-container *ngFor="let station of stations">
+        <div class="col">
+          <div class="row"> {{setCorrectValues(station, date)}}
+            <span class="bold">{{ totalCantidadCalculado }}  -- </span>
+            <span class="bold">{{ totalValorTabuladoCalculado }}</span>
+          </div>
+        </div>
+      </ng-container>
+  </div>
+
+</div>
+
+
+<!-- Valores Brutos -->
+<div class="row bp-itemcontsect2" *ngIf="showVehicleGeneralData">
+  <div class="row">
+
+    <div>
+      <button class="btn-info" (click)="previousPage()"><i class="mdi mdi-chevron-left"></i> Página Anterior </button>
+    </div>
+
+    <div>
+      <button class="btn-info" (click)="nextPage()"> Siguiente Página <i class="mdi mdi-chevron-right"></i></button>
+    </div>
+
+  </div>
+
+  <div class="table-row-content-add-custom row">
+
+    <span class="bold large-font order" (click)="onClickOrderByCamp('estacion')">Estación
+      <i class="mdi mdi-chevron-down"></i>
+    </span>
+
+    <span class="bold large-font order">Sentido</span>
+
+    <span class="bold large-font order" (click)="onClickOrderByCamp('hora')">Hora
+      <i class="mdi mdi-chevron-down"></i>
+    </span>
+
+    <span class="bold large-font order" (click)="onClickOrderByCamp('categoria')">Categoría
+      <i class="mdi mdi-chevron-down"></i>
+    </span>
+
+    <span class="bold large-font order" (click)="onClickOrderByCamp('fecha')">Fecha
+      <i class="mdi mdi-chevron-down"></i>
+    </span>
+
+    <span class="bold large-font order" (click)="onClickOrderByCamp('cantidad')">Cantidad
+      <i class="mdi mdi-chevron-down"></i>
+    </span>
+
+    <span class="bold large-font order" (click)="onClickOrderByCamp('valorTabulado')">Valor
+      <i class="mdi mdi-chevron-down"></i>
+    </span>
+
+  </div>
+
+  <div class="table-row-content-add-custom" *ngFor="let vehicle of vehicleData">
+    <span>{{vehicle.estacion}}</span>
+    <span>{{vehicle.sentido}}</span>
+    <span>{{vehicle.hora}}</span>
+    <span>{{vehicle.categoria}}</span>
+    <span>{{vehicle.fecha}}</span>
+    <span>{{vehicle.cantidad}}</span>
+    <span>{{vehicle.valorTabulado}}</span>
+  </div>
+
+</div>
