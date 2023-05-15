@@ -1,17 +1,24 @@
+<div class=" title bp-itemcontsect2" >
+  <h1>Portal Conteo & Recaudo</h1>
+</div>
+
 <div class="bp-itemcontsect2" [formGroup]="formGroup" novalidate>
   <div formGroupName="formSearchService">
-    <div class="row row-form">
 
+    <div class="row row-form">
+      <div class="col"> <h3>Estación</h3> </div>
+      <div class="col"> <h3>Fecha Desde</h3> </div>
+      <div class="col"> <h3> Fecha Hasta </h3> </div>
+
+    </div>
+
+    <div class="row row-form">
       <div class="col">
-        <label>Estación</label>
-        <div class="row">
           <ng-select [selectOnTab]="true" [items]="stations" class="custom-select"
             formControlName="{{FORM_CONTROL_STATION}}"></ng-select>
-        </div>
       </div>
 
       <div class="col">
-        <label>Fecha Desde</label>
         <div class="row calendar-container">
           <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d1="ngbDatepicker"
             formControlName="{{FORM_CONTROL_FROM_DATE}}" readonly>
@@ -22,7 +29,6 @@
       </div>
 
       <div class="col">
-        <label> Fecha Hasta </label>
         <div class="row calendar-container">
           <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d2="ngbDatepicker"
             formControlName="{{FORM_CONTROL_TO_DATE}}" readonly>
@@ -34,11 +40,9 @@
     </div>
 
     <div class="row-button">
-      <div class="col">
-        <button class="button" (click)="showData()">Ver Todos Los Datos</button>
-      </div>
-      <div class="col">
-        <button class="button" (click)="showValueData()">Ver Valores</button>
+      <div class="col2">
+        <button class="button" (click)="showData()">Buscar Datos Netos</button>
+        <button class="button" (click)="showValueData()">Ver Valores Acumulados</button>
       </div>
     </div>
 
